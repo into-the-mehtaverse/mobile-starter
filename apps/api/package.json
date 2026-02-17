@@ -8,6 +8,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "@packages/contracts": "workspace:*",
     "@hono/node-server": "^1.19.9",
     "hono": "^4.11.9",
     "zod": "^4.3.6"
