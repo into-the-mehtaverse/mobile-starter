@@ -2,5 +2,10 @@
   "name": "mobile-starter",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "pnpm@10.20.0"
+  "packageManager": "pnpm@10.20.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter \"./apps/*\" run dev",
+    "dev:mobile": "pnpm --filter mobile dev",
+    "dev:api": "pnpm --filter @apps/api dev"
+  }
 }
