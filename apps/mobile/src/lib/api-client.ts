@@ -1,4 +1,6 @@
 import {
+  apiErrorResponseSchema,
+  apiSuccessSchema,
   authCheckEmailRequestSchema,
   authCheckEmailResponseSchema,
   healthResponseSchema,
@@ -8,14 +10,26 @@ import {
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3001";
 
+async function readApiError(response: Response): Promise<Error> {
+  const parsed = apiErrorResponseSchema.safeParse(await response.json());
+  if (parsed.success) {
+    return new Error(parsed.data.error.message);
+  }
+
+  return new Error(`Request failed with status ${response.status}`);
+}
+
 export async function getHealth(): Promise<HealthResponse> {
   const response = await fetch(`${API_BASE_URL}/health`);
 
   if (!response.ok) {
-    throw new Error(`Health request failed with status ${response.status}`);
+    throw await readApiError(response);
   }
 
-  return healthResponseSchema.parse(await response.json());
+  const parsed = apiSuccessSchema(healthResponseSchema).parse(
+    await response.json()
+  );
+  return parsed.data;
 }
 
 export async function checkEmailAvailability(
@@ -31,8 +45,11 @@ export async function checkEmailAvailability(
   });
 
   if (!response.ok) {
-    throw new Error(`Check email failed with status ${response.status}`);
+    throw await readApiError(response);
   }
 
-  return authCheckEmailResponseSchema.parse(await response.json());
+  const parsed = apiSuccessSchema(authCheckEmailResponseSchema).parse(
+    await response.json()
+  );
+  return parsed.data;
 }
