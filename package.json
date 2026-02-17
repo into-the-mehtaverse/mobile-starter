@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "pnpm -r --parallel --filter \"./apps/*\" run dev",
     "dev:mobile": "pnpm --filter mobile dev",
-    "dev:api": "pnpm --filter @apps/api dev"
+    "dev:api": "pnpm --filter @apps/api dev",
+    "db:generate": "pnpm --filter @packages/db db:generate",
+    "db:migrate": "pnpm --filter @packages/db db:migrate",
+    "db:studio": "pnpm --filter @packages/db db:studio"
   }
 }
