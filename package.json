@@ -7,8 +7,12 @@
     "dev": "pnpm -r --parallel --filter \"./apps/*\" run dev",
     "dev:mobile": "pnpm --filter mobile dev",
     "dev:api": "pnpm --filter @apps/api dev",
+    "db:up": "docker compose -f infra/docker/docker-compose.yml up -d",
+    "db:down": "docker compose -f infra/docker/docker-compose.yml down",
+    "db:logs": "docker compose -f infra/docker/docker-compose.yml logs -f postgres",
     "db:generate": "pnpm --filter @packages/db db:generate",
     "db:migrate": "pnpm --filter @packages/db db:migrate",
-    "db:studio": "pnpm --filter @packages/db db:studio"
+    "db:studio": "pnpm --filter @packages/db db:studio",
+    "db:seed": "pnpm --filter @packages/db db:seed"
   }
 }

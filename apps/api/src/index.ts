@@ -1,14 +1,14 @@
+import "dotenv/config";
 import { serve } from "@hono/node-server";
 import { app } from "./app.js";
-
-const port = Number(process.env.PORT ?? 3001);
+import { env } from "./env.js";
 
 serve(
   {
     fetch: app.fetch,
-    port,
+    port: env.PORT,
   },
   () => {
-    console.log(`API listening on http://localhost:${port}`);
+    console.log(`API listening on http://localhost:${env.PORT}`);
   }
 );

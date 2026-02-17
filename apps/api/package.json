@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@packages/contracts": "workspace:*",
+    "@packages/db": "workspace:*",
     "@hono/node-server": "^1.19.9",
+    "dotenv": "^17.2.3",
     "hono": "^4.11.9",
     "zod": "^4.3.6"
   },

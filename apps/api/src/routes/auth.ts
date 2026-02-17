@@ -2,6 +2,7 @@ import {
   authCheckEmailRequestSchema,
   authCheckEmailResponseSchema,
 } from "@packages/contracts";
+import { db } from "@packages/db";
 import { Hono } from "hono";
 
 import { jsonError, jsonSuccess } from "../lib/http.js";
@@ -21,10 +22,14 @@ authRouter.post("/check-email", async (c) => {
     });
   }
 
-  // Placeholder behavior until user persistence is wired in.
+  const existingUser = await db.query.usersTable.findFirst({
+    columns: { id: true },
+    where: (users, { eq }) => eq(users.email, input.data.email),
+  });
+
   return jsonSuccess(c, authCheckEmailResponseSchema, {
     email: input.data.email,
-    available: true,
+    available: !existingUser,
   });
 });
 
