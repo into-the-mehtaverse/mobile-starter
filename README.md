@@ -16,3 +16,10 @@ TypeScript monorepo starter for Expo mobile + Hono API.
    - `DATABASE_URL=postgresql://postgres:postgres@localhost:5432/mobile_starter pnpm db:seed`
 6. Open schema browser:
    - `DATABASE_URL=postgresql://postgres:postgres@localhost:5432/mobile_starter pnpm db:studio`
+
+## Reset local database
+
+- Reset to clean local state (deletes data): `pnpm db:reset`
+- Remove container and volume only: `pnpm db:destroy`
+- After reset/destroy+up, re-run migrations:
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5432/mobile_starter pnpm db:migrate`

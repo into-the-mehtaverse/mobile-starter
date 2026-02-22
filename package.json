@@ -9,6 +9,8 @@
     "dev:api": "pnpm --filter @apps/api dev",
     "db:up": "docker compose -f infra/docker/docker-compose.yml up -d",
     "db:down": "docker compose -f infra/docker/docker-compose.yml down",
+    "db:destroy": "docker compose -f infra/docker/docker-compose.yml down -v --remove-orphans",
+    "db:reset": "pnpm db:destroy && pnpm db:up",
     "db:logs": "docker compose -f infra/docker/docker-compose.yml logs -f postgres",
     "db:generate": "pnpm --filter @packages/db db:generate",
     "db:migrate": "pnpm --filter @packages/db db:migrate",

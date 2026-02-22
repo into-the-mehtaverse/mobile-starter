@@ -14,6 +14,22 @@ pnpm db:up
 pnpm db:down
 ```
 
+## Destroy Postgres data (destructive)
+
+```bash
+pnpm db:destroy
+```
+
+This removes the Postgres container and volume. All local DB data is deleted.
+
+## Reset Postgres to a clean state
+
+```bash
+pnpm db:reset
+```
+
+This is equivalent to destroy + up. After reset, run migrations again.
+
 ## View logs
 
 ```bash
